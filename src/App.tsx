@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { CheckCircle2, CircleDot, Clock, LifeBuoy, Plus, Timer } from 'lucide-react';
+import { CheckCircle2, CircleDot, Clock, Download, LifeBuoy, Plus, Timer } from 'lucide-react';
 import { CartaoMetrica } from '@/components/CartaoMetrica';
 import { FiltrosDemandas } from '@/components/FiltrosDemandas';
 import { FormularioDemanda } from '@/components/FormularioDemanda';
@@ -7,6 +7,7 @@ import { GraficoBarras } from '@/components/GraficoBarras';
 import { GraficoPizza } from '@/components/GraficoPizza';
 import { TabelaDemandas } from '@/components/TabelaDemandas';
 import { gerarDemandasIniciais } from '@/data/demandasIniciais';
+import { exportarDemandasCsv } from '@/lib/exportarCsv';
 import { hojeISO } from '@/lib/datas';
 import {
   calcularResumo,
@@ -88,14 +89,24 @@ function App() {
               <p className="text-sm text-slate-600">Acompanhamento de demandas dos sistemas internos</p>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={() => setFormularioAberto(true)}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-800 active:scale-[0.98]"
-          >
-            <Plus className="h-4 w-4" aria-hidden="true" />
-            Nova demanda
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => exportarDemandasCsv(demandas)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 active:scale-[0.98]"
+            >
+              <Download className="h-4 w-4" aria-hidden="true" />
+              Exportar CSV
+            </button>
+            <button
+              type="button"
+              onClick={() => setFormularioAberto(true)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-800 active:scale-[0.98]"
+            >
+              <Plus className="h-4 w-4" aria-hidden="true" />
+              Nova demanda
+            </button>
+          </div>
         </div>
       </header>
 
